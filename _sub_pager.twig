@@ -1,0 +1,13 @@
+{% set link = "?" ~ filter ~ order ~ "page=" %}
+
+{% if pager.totalpages > 1 %}
+
+{% if pager.current > 1 %}
+    <span class="prev"><a href="{{link}}{{pager.current-1}}">&laquo; Newer</a></span>
+{% endif %}
+
+{% if pager.current < pager.totalpages %}
+    <span class="next"><a href="{{link}}{{pager.current+1}}">Continue &raquo; </a></span>
+{% endif %}
+
+{% endif %} 

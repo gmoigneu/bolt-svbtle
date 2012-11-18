@@ -1,0 +1,50 @@
+{% include '_header.twig' %}
+
+<div class="entry-meta">
+	
+</div><!-- .entry-meta -->
+
+<header id="begin">
+	<time datetime="{{ "now"|date("Y-m-d") }}" id="top_time">{{ "now"|date("F d, Y") }}</time>
+</header>
+
+
+{% setcontent entries = "entries/latest/" ~ app.config.general.listing_records ~ allowpaging %}
+
+{% if entries|length < 1 %}
+<article id="<?php the_ID(); ?>" class="post">
+	<h2 class="entry-title">No content found.</h2>
+	<div class="entry-content">
+		<p>Sorry but no content is available at the moment. Please check back later.</p>
+	</div><!-- .entry-content -->
+{% endif %}
+
+{% for entry in entries %}
+<article id="<?php the_ID(); ?>" class="post">
+	<h2 class="entry-title">{{ entry.title }}</h2>
+	{% if entry.image!="" %}
+	        <div class='imageholder-wide'><img src="{{ entry.image|thumbnail(500, 400) }}"></div>
+	{% endif %}
+	<div class="entry-content">
+		{{ entry.body }}
+	</div><!-- .entry-content -->
+	<aside class="kudo kudoable" id="<?php the_ID(); ?>">
+		<a href="?" class="kudobject">
+			<div class="opening clearfix">
+				<span class="circle">&nbsp;</span>
+			</div>
+		</a>
+		<a href="?" class="counter">
+			<span class="num">{{ entry.kudos|number_format(0, '.', ',') }}</span>
+			<span class="txt">Kudos</span>
+		</a>
+	</aside>
+</article><!-- #post-## -->
+{% endfor %}
+
+<nav class="pagination">
+{{ pager() }}
+</nav>
+
+{% include '_footer.twig' %}
+
