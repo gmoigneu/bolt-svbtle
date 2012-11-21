@@ -21,7 +21,7 @@
 
 {% for entry in entries %}
 <article id="<?php the_ID(); ?>" class="post">
-	<h2 class="entry-title">{{ entry.title }}</h2>
+	<h2 class="entry-title"><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
 	{% if entry.image!="" %}
 	        <div class='imageholder-wide'><img src="{{ entry.image|thumbnail(500, 400) }}"></div>
 	{% endif %}
